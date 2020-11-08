@@ -4,7 +4,7 @@
   "description": "Upload reports generated in github actions directly to your running Faraday instance",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ncc build src/main.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/flopezluksenberg/gha-faraday-report-uploader#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
+    "@vercel/ncc": "^0.25.1",
     "axios": "^0.21.0",
     "form-data": "^3.0.0"
   }
