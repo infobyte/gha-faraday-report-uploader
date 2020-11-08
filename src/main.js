@@ -21,7 +21,7 @@ const FILES = 'files';
 async function login (opts) {
     const {agent, username, password} = opts;
 
-    core.debug('Login to Faraday');
+    core.info('Login to Faraday');
 
     const url = `/_api/login`;
     const credentials = { email: username, password }
@@ -43,7 +43,7 @@ async function login (opts) {
 async function existsWorkspace (opts) {
     const {agent, workspace} = opts;
 
-    core.debug(`Checking if workspace ${workspace} already exists`);
+    core.info(`Checking if workspace ${workspace} already exists`);
 
     const url = `/_api/v2/ws`;
 
@@ -63,7 +63,7 @@ async function existsWorkspace (opts) {
 async function createWorkspace (opts) {
     const {agent, username, workspace} = opts;
 
-    core.debug(`Workspace ${workspace} doesn't existes. Creating it`);
+    core.info(`Workspace ${workspace} doesn't existes. Creating it`);
 
     const url = `/_api/v2/ws`;
     const data = {
@@ -87,7 +87,7 @@ async function createWorkspace (opts) {
 async function uploadFile (opts) {
     const {agent, filename, workspace} = opts;
 
-    core.debug(`Uploading report ${filename} in workspace ${workspace}`);
+    core.info(`Uploading report ${filename} in workspace ${workspace}`);
 
     const csrfUrl = `/_api/session`;
     const url = `/_api/v2/ws/${workspace}/upload_report`;
@@ -116,7 +116,7 @@ async function uploadFile (opts) {
 async function uploadReport(opts) {
     const {baseUrl, username, password, workspace, files} = opts;
 
-    core.debug(`Importing scan from ${filename}`);
+    core.info(`Importing scan from ${JSON.stringify(files)}`);
 
     // ATTENTION: We need to keep the session, so we are going to create an axios instance using
     // the param withCredentials that allows to keep the cookies and avoid us to pass them through
@@ -138,7 +138,7 @@ async function uploadReport(opts) {
     }
     await Promise.all(promises);
 
-    core.debug(`Report uploaded successfully`)
+    core.info(`Report uploaded successfully`)
 }
 
 async function main() {
