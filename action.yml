@@ -1,0 +1,22 @@
+name: Faraday Report Uploader
+description: Upload reports generated in github actions directly to your running Faraday instance
+author: Faraday
+runs:
+  using: node12
+  main: dist/index.js
+inputs:
+  host:
+    description: Your faraday instance hostname like https://faraday.mycompany.com
+    required: true
+  username:
+    description: The faraday username used to upload the file. Use Secrets to avoid expose credentials here.
+    required: true
+  password:
+    description: The faraday password associated to the previous username used to upload the file. Use Secrets to avoid expose credentials here.
+    required: true
+  workspace:
+    description: Workspace name where report will be uploaded
+    required: true
+  filename:
+    description: File which will be uplodaed
+    required: true

@@ -1,0 +1,30 @@
+{
+  "name": "gha-faraday-report-uploader",
+  "version": "1.0.0",
+  "description": "Upload reports generated in github actions directly to your running Faraday instance",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flopezluksenberg/gha-faraday-report-uploader.git"
+  },
+  "keywords": [
+    "action",
+    "github",
+    "security",
+    "Faraday"
+  ],
+  "author": "Faraday",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flopezluksenberg/gha-faraday-report-uploader/issues"
+  },
+  "homepage": "https://github.com/flopezluksenberg/gha-faraday-report-uploader#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "axios": "^0.21.0",
+    "form-data": "^3.0.0"
+  }
+}
