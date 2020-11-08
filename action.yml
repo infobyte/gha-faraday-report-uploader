@@ -17,6 +17,6 @@ inputs:
   workspace:
     description: Workspace name where report will be uploaded
     required: true
-  filename:
-    description: File which will be uplodaed
+  files:
+    description: Files that will be uplodaed
     required: true

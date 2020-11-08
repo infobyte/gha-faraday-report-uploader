@@ -7,7 +7,7 @@ const HOST = 'host';
 const USERNAME = 'username';
 const PASSWORD = 'password';
 const WORKSPACE = 'workspace';
-const FILENAME = 'filename';
+const FILES = 'files';
 
 /**
  *
@@ -87,7 +87,7 @@ async function createWorkspace (opts) {
 async function uploadFile (opts) {
     const {agent, filename, workspace} = opts;
 
-    core.debug(`Uploading report in workspace ${workspace}`);
+    core.debug(`Uploading report ${filename} in workspace ${workspace}`);
 
     const csrfUrl = `/_api/session`;
     const url = `/_api/v2/ws/${workspace}/upload_report`;
@@ -111,10 +111,10 @@ async function uploadFile (opts) {
  * @param {String} opts.username
  * @param {String} opts.password
  * @param {String} opts.workspace
- * @param {String} opts.filename
+ * @param {String} opts.files
  */
 async function uploadReport(opts) {
-    const {baseUrl, username, password, workspace, filename} = opts;
+    const {baseUrl, username, password, workspace, files} = opts;
 
     core.debug(`Importing scan from ${filename}`);
 
@@ -130,7 +130,13 @@ async function uploadReport(opts) {
         await createWorkspace({agent, username, workspace})
     }
 
-    await uploadFile({agent, workspace, filename})
+    const promises = [];
+    for (const file of files) {
+        promises.push(
+            uploadFile({agent, workspace, filename: file})
+        );
+    }
+    await Promise.all(promises);
 
     core.debug(`Report uploaded successfully`)
 }
@@ -142,15 +148,14 @@ async function main() {
         const username = core.getInput(USERNAME);
         const password = core.getInput(PASSWORD);
         const workspace = core.getInput(WORKSPACE);
-        const filename = core.getInput(FILENAME);
+        const files = core.getInput(FILES);
 
         await uploadReport({
             baseUrl: host,
             username,
             password,
             workspace,
-            filename
-
+            files
         })
     } catch (error) {
         core.setFailed(error.message);
