@@ -148,7 +148,9 @@ async function main() {
         const username = core.getInput(USERNAME);
         const password = core.getInput(PASSWORD);
         const workspace = core.getInput(WORKSPACE);
-        const files = core.getInput(FILES);
+        const filesStr = core.getInput(FILES);
+
+        const files = filesStr.split(',').map(f => f.trim())
 
         await uploadReport({
             baseUrl: host,
