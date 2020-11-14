@@ -25,6 +25,13 @@ main() {
 
   for FILE in "${@:5:$#}"
   do
-    faraday::upload_report "$WORKSPACE" "$FILE"
+
+    #Split files by whitespace
+    IFS=' ' read -a SPLITTED_FILES <<< "$FILE"
+
+    for SPPLITED_FILE in "${SPLITTED_FILES[@]}"; do
+        faraday::upload_report "$WORKSPACE" "$SPPLITED_FILE"
+    done
+
   done
 }
