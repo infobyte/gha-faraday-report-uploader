@@ -2,8 +2,14 @@ name: Faraday Report Uploader
 description: Upload reports generated in github actions directly to your running Faraday instance
 author: Faraday
 runs:
-  using: node12
-  main: dist/index.js
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.HOST }}
+    - ${{ inputs.USERNAME }}
+    - ${{ inputs.PASSWORD }}
+    - ${{ inputs.WORKSPACE }}
+    - ${{ inputs.FILES }}
 inputs:
   host:
     description: Your faraday instance hostname like https://faraday.mycompany.com
