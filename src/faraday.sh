@@ -7,7 +7,7 @@ faraday::authenticate() {
   local FARADAY_USERNAME=$2
   local FARADAY_PASSWORD=$3
 
-  faraday-cli auth --url $FARADAY_HOST --user $FARADAY_USERNAME --password $FARADAY_PASSWORD
+  echo "N" | faraday-cli auth --url $FARADAY_HOST --user $FARADAY_USERNAME --password $FARADAY_PASSWORD
 }
 
 faraday::create_workspace() {
